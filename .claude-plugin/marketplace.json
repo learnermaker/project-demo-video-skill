@@ -1,0 +1,19 @@
+{
+  "name": "demo-video-skills",
+  "owner": { "name": "learnermaker", "url": "https://github.com/learnermaker" },
+  "metadata": {
+    "description": "Agent Skills for producing project and hackathon demo videos."
+  },
+  "plugins": [
+    {
+      "name": "project-demo-video",
+      "source": "./",
+      "description": "Make a narrated, captioned 1080p demo video (3 minutes or less) of any software project with Playwright and ffmpeg. ElevenLabs voice optional.",
+      "version": "1.0.0",
+      "author": { "name": "learnermaker" },
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["demo-video", "hackathon", "playwright", "ffmpeg", "captions", "text-to-speech"]
+    }
+  ]
+}

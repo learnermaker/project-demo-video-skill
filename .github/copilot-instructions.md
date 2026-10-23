@@ -1,0 +1,1 @@
+When asked to make a demo video of a project, read `skills/project-demo-video/SKILL.md` and follow it step by step. Templates are in `skills/project-demo-video/templates/`. Work in a copy of the target repo, never print API keys, and keep the video under 3 minutes.

@@ -1,0 +1,10 @@
+{
+  "name": "project-demo-video",
+  "version": "1.0.0",
+  "description": "Agent Skill that produces a narrated, captioned 1080p demo video (3 minutes or less) of any software project with Playwright and ffmpeg. Real app, real proof output, real code, honest labels. ElevenLabs voice optional.",
+  "author": { "name": "learnermaker", "url": "https://github.com/learnermaker" },
+  "homepage": "https://github.com/learnermaker/project-demo-video-skill",
+  "repository": "https://github.com/learnermaker/project-demo-video-skill",
+  "license": "MIT",
+  "keywords": ["demo-video", "hackathon", "playwright", "ffmpeg", "captions", "text-to-speech", "elevenlabs", "agent-skill", "video-generation"]
+}

@@ -1,0 +1,15 @@
+# project-demo-video-skill
+
+> An Agent Skill (SKILL.md) that lets a coding agent produce a narrated, captioned 1080p demo video (under 3 minutes) of any software project or hackathon entry, as code, with Playwright and ffmpeg. Real app, real proof output, real code, honest labels. ElevenLabs voice is optional.
+
+## Skill
+
+- [SKILL.md](https://raw.githubusercontent.com/learnermaker/project-demo-video-skill/main/skills/project-demo-video/SKILL.md): rules, phases, pipeline, pitfalls, QA checklist
+- [templates/final.mjs](https://raw.githubusercontent.com/learnermaker/project-demo-video-skill/main/skills/project-demo-video/templates/final.mjs): orchestrator
+- [templates/narration.mjs](https://raw.githubusercontent.com/learnermaker/project-demo-video-skill/main/skills/project-demo-video/templates/narration.mjs): script format
+
+## Repo
+
+- [README](https://github.com/learnermaker/project-demo-video-skill#readme)
+- [AGENTS.md](https://raw.githubusercontent.com/learnermaker/project-demo-video-skill/main/AGENTS.md)
+- [CHANGELOG](https://raw.githubusercontent.com/learnermaker/project-demo-video-skill/main/CHANGELOG.md)

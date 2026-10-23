@@ -1,0 +1,6 @@
+---
+description: Make a narrated, captioned demo video of a project (hackathon submission, product demo). Use when asked to create or redo a demo video.
+alwaysApply: false
+---
+
+Read `skills/project-demo-video/SKILL.md` in this repository and follow its phases in order. Copy `skills/project-demo-video/templates/` into the target project's working copy as `video/`. Work in a copy; never write to the user's original repo; never print API keys.
