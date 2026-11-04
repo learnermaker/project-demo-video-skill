@@ -1,7 +1,7 @@
 {
   "name": "project-demo-video",
-  "version": "1.0.0",
-  "description": "Agent Skill that produces a narrated, captioned 1080p demo video (3 minutes or less) of any software project with Playwright and ffmpeg. Real app, real proof output, real code, honest labels. ElevenLabs voice optional.",
+  "version": "1.1.0",
+  "description": "Agent Skill that produces narrated, captioned software demo videos with real app evidence, creative direction and optional audio quality measurement. Playwright and FFmpeg local-first; ElevenLabs optional.",
   "author": { "name": "learnermaker", "url": "https://github.com/learnermaker" },
   "homepage": "https://github.com/learnermaker/project-demo-video-skill",
   "repository": "https://github.com/learnermaker/project-demo-video-skill",

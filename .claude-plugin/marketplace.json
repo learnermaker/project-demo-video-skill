@@ -8,8 +8,8 @@
     {
       "name": "project-demo-video",
       "source": "./",
-      "description": "Make a narrated, captioned 1080p demo video (3 minutes or less) of any software project with Playwright and ffmpeg. ElevenLabs voice optional.",
-      "version": "1.0.0",
+      "description": "Make narrated, captioned software demo videos with real app evidence, creative direction and optional audio QA. Playwright and FFmpeg local-first.",
+      "version": "1.1.0",
       "author": { "name": "learnermaker" },
       "license": "MIT",
       "category": "productivity",
