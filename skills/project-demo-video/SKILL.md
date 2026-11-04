@@ -4,7 +4,7 @@ description: Produce a narrated, captioned 1080p demo video (3 minutes or less) 
 license: MIT
 compatibility: Needs Node.js 22+ with @playwright/test (Chromium) and ffmpeg-static in the project copy. Speech synthesis in the templates is Windows-only (System.Speech); other systems need a small adaptation of lib/tts.mjs. ElevenLabs is optional and needs an account and API key.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: video-production
   tags: demo-video hackathon playwright ffmpeg captions text-to-speech
 ---
@@ -53,7 +53,7 @@ node --version          # 22+ (24 recommended; .mjs files must be plain JavaScri
 ## 2. Phases
 
 ### Phase A: Requirements and proof map
-Read the rules page, the README, the project's own docs and any storyline notes. Write a table in your notes:
+Read the rules page, the README, the project's own docs and any storyline notes. Identify the audience, viewing context, one-sentence product promise and three strongest differentiators. Choose a visual direction that fits the product rather than applying effects indiscriminately. Write a table in your notes:
 
 | Judge must be convinced that | Where the video proves it | Scene |
 |---|---|---|
@@ -107,6 +107,7 @@ Edit only what is project-specific:
 | `video/lib/overlay.mjs` | `SIM_CSS` selectors for your app's layout (see Layout rules), the ticker's data source |
 | `video/final.mjs` | the `LIMIT` constant and scene order (order comes from `narration.mjs`) |
 | `video/thumbnail.mjs`, `video/docs.mjs` | titles and the `SHOT` table |
+| `video/audio-qa.mjs` | optional final audio loudness measurement |
 
 Do not edit `lib/recorder.mjs`, `lib/director.mjs`, `lib/tts.*` unless something is broken.
 
@@ -130,7 +131,7 @@ Important: if you change narration text or the voice, durations change, so **eve
 
 ### Phase I: QA (never skip, never trust the log)
 1. Extract frames at the end of each narration line from the final MP4: `ffmpeg -ss <markEnd-0.3> -i final.mp4 -frames:v 1 frame.png` (the timeline is in `video/out/timeline.json`). View them. Check legibility at 1080p, empty space, clipped text, caption position and size, sync (the caption's event is on screen), no secret, no vendor mention, honesty labels present.
-2. `ffmpeg -i final.mp4 -af volumedetect -f null -`: mean about -22 dB, max below 0 dB.
+2. Run `node video/audio-qa.mjs <final-video.mp4>` to measure integrated loudness, true peak and loudness range with FFmpeg EBU R128. Review warnings and listen to the mix; the script measures only and does not normalize or guarantee perceptual quality. Keep `volumedetect` as a quick peak/mean diagnostic if useful.
 3. Duration under the limit in both cuts; both files have a video and an audio stream.
 4. `grep -ril "<vendor words>" video/pages video/narration.mjs <output docs>` returns nothing except an allowed model id.
 5. Run the project's checks again (`npm run verify`; e2e if the UI changed).
@@ -140,6 +141,8 @@ Important: if you change narration text or the voice, durations change, so **eve
 Generate `narration.md` and `shotlist.md` with `node video/docs.mjs <outdir>` (real timestamps). Copy the MP4s, SRT, thumbnail (`node video/thumbnail.mjs <png>`), the QA frames, and the changed repo files (all differing files between the original and your copy, at their repo paths). Write `COPY_LIST.md` (bug fixes first, then new files, suggested commit messages, "run build and verify after copying"), `README-snippet.md` (run command, entry-point file:line, client file:line, skill file, video link placeholder) and `REPORT.md` (done, what the user must do, risks). Say plainly what you could not check (for example, you could not listen to the voice).
 
 ## 3. How the pipeline works (read before changing it)
+
+The optional `templates/audio-qa.mjs` script measures the final media audio stream using FFmpeg EBU R128 loudness analysis. It does not rewrite the file. See `docs/PRODUCTION_QUALITY.md` for optional speech-alignment and motion-renderer guidance.
 
 **Recorder** (`lib/recorder.mjs`). Playwright's own `recordVideo` caps bitrate and blurs small text, so this uses Chromium screencast: JPEG frames (quality 92) are stamped when they arrive, written to disk and encoded at a constant 30 fps with libx264 crf 17. Static screens produce few frames; the last frame is held. Timestamps come from one clock (`performance.timeOrigin + performance.now()`), the same one the director uses.
 
@@ -211,6 +214,7 @@ Levers, in order: shorten lines; reduce `tail` values; raise speech rate (not ab
 - [ ] The app was run from the documented command; shown commands are literal.
 - [ ] Real vs simulated is stated on screen.
 - [ ] No empty screens, no clipped text, captions legible and matching the voice.
+- [ ] Audio loudness and true peak measured; any warnings reviewed and documented.
 - [ ] Runtime under the limit in every cut; audio present in both cuts.
 - [ ] No secrets, no vendor mentions, no real personal data.
 - [ ] The project's own checks pass with your fixes applied in the copy.
