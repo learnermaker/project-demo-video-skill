@@ -111,6 +111,8 @@ Edit only what is project-specific:
 
 Do not edit `lib/recorder.mjs`, `lib/director.mjs`, `lib/tts.*` unless something is broken.
 
+**Optional motion-renderer path:** use HyperFrames only for designed title cards, transitions and explanatory diagrams when the existing HTML cards are insufficient. It must never replace Playwright footage of the real app, terminal proof or source-code evidence. Keep it in a disposable sidecar workspace, pin its CLI version, use local assets, and export silent intermediate clips for the existing FFmpeg assembler. Do not add it to the user's app dependencies or make it a prerequisite. HyperFrames' local CLI requires system FFmpeg; the existing `ffmpeg-static` package may not satisfy that prerequisite. If the CLI doctor fails, skip this path rather than installing software or changing PATH without approval. Follow [the renderer evaluation and proof-of-concept gates](../../docs/HYPERFRAMES_EVALUATION.md). This path is optional and has not been validated on every platform.
+
 ### Phase F: Capture real proof output
 `node video/proofs.mjs` starts a fresh server, runs the real commands (official inspector or client CLI, auth checks, install/boot output) and saves what they printed to `video/out/proofs.json`. The terminal scenes **replay this captured output** in an HTML terminal at a readable size. Rules: show the real command text (shorten only the package path); truncate very long output visibly (a dim "... N lines ..." line) and put "Recorded run" in the chip; never print tokens; pretty-print JSON and say so if you do.
 
