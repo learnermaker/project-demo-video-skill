@@ -32,9 +32,11 @@ Keep the real application recording separate from designed explanatory footage:
 - **Designed footage:** a separate renderer may create title cards, transitions, animated diagrams, charts and feature explanations.
 - **Assembly:** FFmpeg remains responsible for final sequencing, audio mix, captions and export.
 
-[HyperFrames](https://github.com/heygen-com/hyperframes) is the first renderer to evaluate for this boundary because it supports local, frame-oriented HTML video composition. [Motion Canvas](https://github.com/motion-canvas/motion-canvas) is a specialist option for technical diagrams and explanatory animation. Neither is required by the base skill today.
+[HyperFrames](https://github.com/heygen-com/hyperframes) is the first candidate evaluated for this boundary. Its current documented model is HTML/CSS compositions rendered frame-by-frame with seekable timelines. The repository is Apache-2.0 licensed and its documented baseline is Node.js 22+; local rendering requires system FFmpeg, and Docker is optional for a pinned Chrome/font environment. Local output can vary slightly with platform fonts and browser versions. These facts make it promising, but not yet a production dependency for this skill.
 
-Before adding any renderer as a dependency, verify its current license, supported Node/browser versions, deterministic seeking behavior, local rendering path, asset/font licensing and compatibility with the target agent. Integrate one renderer at a time behind a small adapter; do not create competing render pipelines by default.
+The existing project uses `ffmpeg-static` for its own pipeline. Do not assume this binary is discoverable by HyperFrames' separate CLI. A disposable proof of concept must verify prerequisites, render the same sample twice, compare output, and test Windows plus another platform before an adapter is approved. Keep HyperFrames optional, pinned, isolated and limited to designed clips. The existing FFmpeg assembly remains responsible for narration, captions, audio and final exports.
+
+See [HyperFrames evaluation](HYPERFRAMES_EVALUATION.md) for the current findings, architecture decision, proof-of-concept protocol and acceptance gates. [Motion Canvas](https://motioncanvas.io/) remains a specialist alternative for technical diagrams, not an additional dependency to integrate in parallel.
 
 ## 4. Creative direction and editorial review
 

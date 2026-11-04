@@ -2,6 +2,8 @@
 
 ## 1.1.0 (unreleased)
 
+- Document the HyperFrames evaluation, isolated-renderer architecture and proof-of-concept acceptance gates; no renderer dependency added.
+
 - Add an optional local EBU R128 audio measurement script for integrated loudness, true peak and loudness range.
 - Add creative-direction guidance and a production-quality workflow covering speech alignment, motion-renderer boundaries and local-first integration principles.
 - Preserve the Playwright/FFmpeg baseline; no new runtime dependency is introduced.

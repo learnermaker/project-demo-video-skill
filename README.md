@@ -84,7 +84,7 @@ scripts/validate.mjs       checks the skill and manifests (also runs in CI)
 AGENTS.md  llms.txt        guidance for agents and LLM crawlers
 ```
 
-See [Production quality workflow](docs/PRODUCTION_QUALITY.md) for the audio QA gate, optional speech alignment and motion-renderer boundaries.
+See [Production quality workflow](docs/PRODUCTION_QUALITY.md) for the audio QA gate, optional speech alignment and motion-renderer boundaries. The [HyperFrames evaluation](docs/HYPERFRAMES_EVALUATION.md) documents the optional renderer decision and its proof-of-concept gates.
 
 ## Design principles
 
