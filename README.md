@@ -14,14 +14,14 @@ Works with **Claude Code, Codex CLI, Cursor, Gemini CLI, GitHub Copilot, Windsur
 
 ## What the agent will do
 
-1. Read the contest rules and map every claim a judge must believe to a scene.
+1. Read the contest rules, identify the audience and differentiators, and map every claim a judge must believe to a scene.
 2. Work in a **copy** of your repo (never touching the original) and run the app the way a judge would.
 3. Find and fix real bugs the video would expose, in the copy, and list them for you to copy back.
 4. Write a narration script and a storyboard that fit the time limit.
 5. Capture real proof output (official client or CLI, auth checks, boot output).
 6. Record every scene at 1920x1080 / 30 fps, with a visible cursor, zooms and a live "last request" strip.
 7. Make speech (Windows built-in voice by default; **ElevenLabs is optional**) and burn in captions.
-8. Deliver two cuts (with voice, and captions-only), `.srt`, thumbnail, shot list, QA frames and a report.
+8. Deliver two cuts (with voice, and captions-only), `.srt`, thumbnail, shot list, QA frames and a report.\n9. Optionally measure integrated loudness, true peak and loudness range with the local EBU R128 audio QA script.
 
 ## Install
 
@@ -60,7 +60,7 @@ Optional extras you can ask for: *"use ElevenLabs voice <id>"*, *"captions only"
 
 - Node.js 22 or newer.
 - In the project copy: `@playwright/test` with Chromium, and `ffmpeg-static` (the skill explains how to add them without changing your repo's dependencies).
-- Speech: the built-in templates use Windows `System.Speech`. macOS and Linux need a small adaptation of one file (`lib/tts.mjs`), described in the skill.
+- Speech: the built-in templates use Windows `System.Speech`. macOS and Linux need a small adaptation of one file (`lib/tts.mjs`), described in the skill. The optional audio QA script uses the existing `ffmpeg-static` dependency.
 - ElevenLabs (optional): an account and API key. The free plan works with the built-in premade voices only (see Appendix A in the skill).
 
 ## What is inside
@@ -69,7 +69,7 @@ Optional extras you can ask for: *"use ElevenLabs voice <id>"*, *"captions only"
 skills/project-demo-video/
   SKILL.md                 the skill: rules, 10 phases with "done when" checks, pitfalls, QA checklist
   templates/               a working pipeline to copy into the project
-    final.mjs              orchestrator: speech, proofs, record all scenes, assemble both cuts
+    final.mjs              orchestrator: speech, proofs, record all scenes, assemble both cuts\n    audio-qa.mjs          optional EBU R128 loudness and true-peak measurement
     narration.mjs          the script (one line = one spoken line = one caption)
     lib/                   recorder (screencast), director (timing), overlay (cursor, camera), tts
     pages/                 title, terminal, code tour, architecture and closing cards
@@ -82,7 +82,7 @@ scripts/validate.mjs       checks the skill and manifests (also runs in CI)
 AGENTS.md  llms.txt        guidance for agents and LLM crawlers
 ```
 
-## Design principles
+See [Production quality workflow](docs/PRODUCTION_QUALITY.md) for the audio QA gate, optional speech alignment and motion-renderer boundaries.\n\n## Design principles
 
 - **Honest by construction.** Simulated parts are labelled; real output is replayed, never typed by hand.
 - **Narration sets the pace.** Every spoken line is a segment; audio is placed at the moments the picture recorded, so voice and picture cannot drift.
